@@ -15,7 +15,7 @@ jobs:
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
-          image: prometheus-nats-exporter
+          image: archipelago-prometheus-nats-exporter
           tags: ${{ github.sha }} next
           dockerfiles: |
             ./Dockerfile
@@ -40,6 +40,6 @@ jobs:
         uses: decentraland/dcl-deploy-action@main
         with:
           dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
-          serviceName: prometheus-nats-exporter
+          serviceName: archipelago-prometheus-nats-exporter
           env: dev
           token: ${{ secrets.GITHUB_TOKEN }}
