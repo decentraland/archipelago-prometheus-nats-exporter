@@ -2,6 +2,15 @@ name: manual
 
 on:
   workflow_dispatch:
+    inputs:
+      deployment-environment:
+        required: true
+        type: choice
+        options:
+          - prd
+          - dev
+        default: dev
+        description: Environment
 
 jobs:
   main:
@@ -39,5 +48,5 @@ jobs:
         with:
           dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
           serviceName: archipelago-prometheus-nats-exporter
-          env: dev
+          env: ${{ inputs.deployment-environment }}
           token: ${{ secrets.GITHUB_TOKEN }}
